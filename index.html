@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
+
+    
+    <head>
+    <style>
+        
+        h1{font-family: 'Roboto Slab', serif;
+            font-size: 90px;
+            color: whitesmoke;
+        }
+        
+
+        html, body{
+            
+            background: -webkit-linear-gradient(-90deg, #2979FF, #0D47A1);
+            background-size: auto;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+        }
+        
+        img{
+            
+            height="150px"; width="300px";
+        }
+        
+        button{
+            
+            border-radius: 5px;
+            width: 190px;
+            border-width: 2px;
+            font-size: 20px;
+            
+            
+            
+        }
+        
+        
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: 'Roboto Slab', serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #2979FF;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+}
+        
+        </style>
+    
+    </head>
+    
+    <body>
+    <center>
+<h1>Human Check</h1>
+<p id="head">To prove that you are  not a robot who is going to destroy<br> my website please answer this.</p>
+        
+<div class="w3-card-4" style="width:50%;">
+ 
+<header class="w3-container w3-blue w3-animate-bottom">
+  <p id="head2"> Which of these pictures is a <ln id="object"></ln>?</p>
+</header>
+
+<div onclick class="w3-container w3-white w3-animate-bottom">
+<p>
+    
+    <p>
+        <ln id ="1"></ln>
+        <ln id ="2"></ln></p>
+       <p> <ln id ="3"></ln>
+        <ln id ="4"></ln></p>
+      <p>  <ln id ="5"></ln>
+          <ln id ="6"></ln></p>
+    
+    
+
+</div>
+        </div>
+
+        <p><button class="w3-btn w3-white w3-animate-opacity" onclick="refresh()">Refresh Captcha</button></p>
+        
+        
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2 id="human">You are a Cow-ard</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<img id="veri" src="10.png">
+		</div>
+	</div>
+</div>
+        
+
+        
+        <script>
+            
+            
+            function shuffle(o,l){
+    for(var j, x,t,s,n,k, i = o.length; i; 
+    t = Math.floor(Math.random() * i),
+    j=t,
+    n=i,
+    x = o[--i], 
+    o[i] = o[j], 
+    o[j] = x, 
+    
+    s=t,
+    k = l[--n], 
+    l[n] = l[s], 
+    l[s] = k);
+    return o;
+    return l;
+}
+        
+            //var x=0;
+            var y=0;
+            var p=0;
+            var t;
+            var pics=["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png","17.png","18.png","19.png","20.png"];
+            var nams=["Guitar","Ball", "Biker","Sun","Fries","Cookie","Choclate","Crocodile","Camel","Cow","Bear","Tree","Watermelon","Pizza","Donut","Hen","Octopus","Chick","Baby","Heart"];
+            
+            shuffle(pics, nams);
+
+            
+            for(var t=1;t<=6;t++){
+                
+               
+                //document.getElementById(t).src=pics[t];
+                document.getElementById(t).innerHTML="<img onclick =verify('" + nams[t] + "') src=" +  pics[t] + ">";
+            
+    
+
+                
+    }
+            
+y=Math.floor(1+Math.random(1)*6);
+    y=nams[y];
+document.getElementById("object").innerHTML=y;
+ 
+            
+           function verify(q){
+                
+                if(y==q){
+                    
+                document.getElementById("human").innerHTML="You are a Human ";
+                document.getElementById("veri").src="right.png";
+                location.hash = "popup1";
+                    
+
+                    
+                }
+               
+               else{
+                   
+                document.getElementById("human").innerHTML="You are a Robot";
+                document.getElementById("veri").src="wrong.png";
+                location.hash = "popup1";
+                   
+               }
+                   
+                return q;
+            }
+            
+            function refresh() {
+    location.reload();
+}
+            
+        </script>
+        
+</center>
+        
+</body>
+</html>
